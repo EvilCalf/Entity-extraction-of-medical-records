@@ -1,15 +1,13 @@
-import keras
-import numpy as np
-from keras import backend as K
-from keras.preprocessing.sequence import pad_sequences
-from keras.models import Sequential, load_model
-from keras.layers import Embedding, Bidirectional, LSTM, Dense, TimeDistributed, Dropout
-from keras_contrib.layers.crf import CRF
-import matplotlib.pyplot as plt
-import os
 import json
-import pandas as pd
+import os
 
+import numpy as np
+from keras.layers import (LSTM, Bidirectional, Dense, Dropout, Embedding,
+                          TimeDistributed)
+from keras.models import Sequential, load_model
+from keras.preprocessing.sequence import pad_sequences
+
+from keras_contrib.layers.crf import CRF
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
@@ -42,7 +40,7 @@ class LSTMNER:
         self.BATCH_SIZE = 128
         self.NUM_CLASSES = len(self.class_dict)
         self.VOCAB_SIZE = len(self.word_dict)
-        self.TIME_STAMPS = 1000 # 最长病历文本长度
+        self.TIME_STAMPS = 1000  # 最长病历文本长度
         self.embedding_matrix = self.build_embedding_matrix()
         self.model = self.tokenvec_bilstm2_crf_model()
         self.model.load_weights(self.model_path)
@@ -75,7 +73,7 @@ class LSTMNER:
         with open("data_out_json/"+file.replace(".txt", "")+".json", 'w', encoding='utf-8') as file_obj:
             ans_json = {'data': [{'chars': i[0], 'tags': i[1]}
                                  for i in res]}
-            json.dump(ans_json, file_obj,indent=4,ensure_ascii=False)
+            json.dump(ans_json, file_obj, indent=4, ensure_ascii=False)
         return res
 
     '''加载预训练词向量'''
