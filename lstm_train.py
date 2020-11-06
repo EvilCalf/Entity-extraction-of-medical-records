@@ -35,8 +35,8 @@ class LSTMNER:
             'DISEASE-B': 10
         }
         self.EMBEDDING_DIM = 300
-        self.EPOCHS = 10
-        self.BATCH_SIZE = 128
+        self.EPOCHS = 20
+        self.BATCH_SIZE = 256
         self.NUM_CLASSES = len(self.class_dict)
         self.VOCAB_SIZE = len(self.word_dict)
         self.TIME_STAMPS = 50  # 最长病历文本长度(这里长度过长，不足的位置补0，会严重影响训练结果)

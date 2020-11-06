@@ -40,7 +40,7 @@ class LSTMNER:
         self.BATCH_SIZE = 128
         self.NUM_CLASSES = len(self.class_dict)
         self.VOCAB_SIZE = len(self.word_dict)
-        self.TIME_STAMPS = 150  # 最长病历文本长度
+        self.TIME_STAMPS = 1000  # 最长病历文本长度
         self.embedding_matrix = self.build_embedding_matrix()
         self.model = self.tokenvec_bilstm2_crf_model()
         self.model.load_weights(self.model_path)
