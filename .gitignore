@@ -68,11 +68,5 @@ __pycache__
 # VSC Counter
 /.VSCodeCounter/
 
-# data
-/data/
-
 # cache
 /Cache/*.jpg
-
-# model
-/model/
