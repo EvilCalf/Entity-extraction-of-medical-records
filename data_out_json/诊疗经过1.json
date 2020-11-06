@@ -1,0 +1,204 @@
+{
+    "data": [
+        {
+            "chars": "入",
+            "tags": "O"
+        },
+        {
+            "chars": "院",
+            "tags": "O"
+        },
+        {
+            "chars": "后",
+            "tags": "O"
+        },
+        {
+            "chars": "完",
+            "tags": "O"
+        },
+        {
+            "chars": "善",
+            "tags": "O"
+        },
+        {
+            "chars": "各",
+            "tags": "O"
+        },
+        {
+            "chars": "项",
+            "tags": "O"
+        },
+        {
+            "chars": "检",
+            "tags": "O"
+        },
+        {
+            "chars": "查",
+            "tags": "O"
+        },
+        {
+            "chars": "，",
+            "tags": "O"
+        },
+        {
+            "chars": "给",
+            "tags": "O"
+        },
+        {
+            "chars": "予",
+            "tags": "O"
+        },
+        {
+            "chars": "右",
+            "tags": "O"
+        },
+        {
+            "chars": "下",
+            "tags": "O"
+        },
+        {
+            "chars": "肢",
+            "tags": "O"
+        },
+        {
+            "chars": "持",
+            "tags": "O"
+        },
+        {
+            "chars": "续",
+            "tags": "O"
+        },
+        {
+            "chars": "皮",
+            "tags": "O"
+        },
+        {
+            "chars": "牵",
+            "tags": "O"
+        },
+        {
+            "chars": "引",
+            "tags": "O"
+        },
+        {
+            "chars": "，",
+            "tags": "O"
+        },
+        {
+            "chars": "应",
+            "tags": "O"
+        },
+        {
+            "chars": "用",
+            "tags": "O"
+        },
+        {
+            "chars": "健",
+            "tags": "O"
+        },
+        {
+            "chars": "骨",
+            "tags": "O"
+        },
+        {
+            "chars": "药",
+            "tags": "O"
+        },
+        {
+            "chars": "物",
+            "tags": "O"
+        },
+        {
+            "chars": "治",
+            "tags": "O"
+        },
+        {
+            "chars": "疗",
+            "tags": "O"
+        },
+        {
+            "chars": "，",
+            "tags": "O"
+        },
+        {
+            "chars": "患",
+            "tags": "O"
+        },
+        {
+            "chars": "者",
+            "tags": "O"
+        },
+        {
+            "chars": "略",
+            "tags": "O"
+        },
+        {
+            "chars": "发",
+            "tags": "DISEASE-B"
+        },
+        {
+            "chars": "热",
+            "tags": "DISEASE-I"
+        },
+        {
+            "chars": "，",
+            "tags": "DISEASE-I"
+        },
+        {
+            "chars": "查",
+            "tags": "DISEASE-I"
+        },
+        {
+            "chars": "血",
+            "tags": "O"
+        },
+        {
+            "chars": "常",
+            "tags": "O"
+        },
+        {
+            "chars": "规",
+            "tags": "O"
+        },
+        {
+            "chars": "：",
+            "tags": "O"
+        },
+        {
+            "chars": "白",
+            "tags": "O"
+        },
+        {
+            "chars": "细",
+            "tags": "O"
+        },
+        {
+            "chars": "胞",
+            "tags": "O"
+        },
+        {
+            "chars": "数",
+            "tags": "O"
+        },
+        {
+            "chars": "1",
+            "tags": "O"
+        },
+        {
+            "chars": "2",
+            "tags": "O"
+        },
+        {
+            "chars": ".",
+            "tags": "O"
+        },
+        {
+            "chars": "1",
+            "tags": "O"
+        },
+        {
+            "chars": "8",
+            "tags": "O"
+        }
+    ]
+}

@@ -1,0 +1,604 @@
+{
+    "data": [
+        {
+            "chars": "1",
+            "tags": "O"
+        },
+        {
+            "chars": ".",
+            "tags": "O"
+        },
+        {
+            "chars": "患",
+            "tags": "BODY-B"
+        },
+        {
+            "chars": "者",
+            "tags": "BODY-I"
+        },
+        {
+            "chars": "老",
+            "tags": "O"
+        },
+        {
+            "chars": "年",
+            "tags": "O"
+        },
+        {
+            "chars": "女",
+            "tags": "O"
+        },
+        {
+            "chars": "性",
+            "tags": "CHECK-B"
+        },
+        {
+            "chars": "，",
+            "tags": "CHECK-I"
+        },
+        {
+            "chars": "8",
+            "tags": "O"
+        },
+        {
+            "chars": "8",
+            "tags": "CHECK-B"
+        },
+        {
+            "chars": "岁",
+            "tags": "O"
+        },
+        {
+            "chars": "；",
+            "tags": "O"
+        },
+        {
+            "chars": "2",
+            "tags": "O"
+        },
+        {
+            "chars": ".",
+            "tags": "O"
+        },
+        {
+            "chars": "既",
+            "tags": "O"
+        },
+        {
+            "chars": "往",
+            "tags": "O"
+        },
+        {
+            "chars": "体",
+            "tags": "CHECK-B"
+        },
+        {
+            "chars": "健",
+            "tags": "O"
+        },
+        {
+            "chars": "，",
+            "tags": "O"
+        },
+        {
+            "chars": "否",
+            "tags": "O"
+        },
+        {
+            "chars": "认",
+            "tags": "O"
+        },
+        {
+            "chars": "药",
+            "tags": "O"
+        },
+        {
+            "chars": "物",
+            "tags": "O"
+        },
+        {
+            "chars": "过",
+            "tags": "CHECK-B"
+        },
+        {
+            "chars": "敏",
+            "tags": "O"
+        },
+        {
+            "chars": "史",
+            "tags": "O"
+        },
+        {
+            "chars": "。",
+            "tags": "O"
+        },
+        {
+            "chars": "3",
+            "tags": "O"
+        },
+        {
+            "chars": ".",
+            "tags": "O"
+        },
+        {
+            "chars": "患",
+            "tags": "O"
+        },
+        {
+            "chars": "者",
+            "tags": "CHECK-B"
+        },
+        {
+            "chars": "缘",
+            "tags": "CHECK-I"
+        },
+        {
+            "chars": "于",
+            "tags": "O"
+        },
+        {
+            "chars": "5",
+            "tags": "O"
+        },
+        {
+            "chars": "小",
+            "tags": "O"
+        },
+        {
+            "chars": "时",
+            "tags": "O"
+        },
+        {
+            "chars": "前",
+            "tags": "O"
+        },
+        {
+            "chars": "不",
+            "tags": "O"
+        },
+        {
+            "chars": "慎",
+            "tags": "O"
+        },
+        {
+            "chars": "摔",
+            "tags": "O"
+        },
+        {
+            "chars": "伤",
+            "tags": "O"
+        },
+        {
+            "chars": "，",
+            "tags": "O"
+        },
+        {
+            "chars": "伤",
+            "tags": "O"
+        },
+        {
+            "chars": "及",
+            "tags": "CHECK-B"
+        },
+        {
+            "chars": "右",
+            "tags": "CHECK-I"
+        },
+        {
+            "chars": "髋",
+            "tags": "CHECK-I"
+        },
+        {
+            "chars": "部",
+            "tags": "CHECK-I"
+        },
+        {
+            "chars": "。",
+            "tags": "O"
+        },
+        {
+            "chars": "伤",
+            "tags": "O"
+        },
+        {
+            "chars": "后",
+            "tags": "O"
+        },
+        {
+            "chars": "患",
+            "tags": "O"
+        },
+        {
+            "chars": "者",
+            "tags": "O"
+        },
+        {
+            "chars": "自",
+            "tags": "O"
+        },
+        {
+            "chars": "感",
+            "tags": "O"
+        },
+        {
+            "chars": "伤",
+            "tags": "O"
+        },
+        {
+            "chars": "处",
+            "tags": "O"
+        },
+        {
+            "chars": "疼",
+            "tags": "O"
+        },
+        {
+            "chars": "痛",
+            "tags": "O"
+        },
+        {
+            "chars": "，",
+            "tags": "O"
+        },
+        {
+            "chars": "呼",
+            "tags": "BODY-B"
+        },
+        {
+            "chars": "我",
+            "tags": "BODY-I"
+        },
+        {
+            "chars": "院",
+            "tags": "BODY-I"
+        },
+        {
+            "chars": "1",
+            "tags": "SIGNS-B"
+        },
+        {
+            "chars": "2",
+            "tags": "SIGNS-I"
+        },
+        {
+            "chars": "0",
+            "tags": "SIGNS-B"
+        },
+        {
+            "chars": "接",
+            "tags": "SIGNS-I"
+        },
+        {
+            "chars": "来",
+            "tags": "O"
+        },
+        {
+            "chars": "我",
+            "tags": "O"
+        },
+        {
+            "chars": "院",
+            "tags": "O"
+        },
+        {
+            "chars": "，",
+            "tags": "O"
+        },
+        {
+            "chars": "查",
+            "tags": "O"
+        },
+        {
+            "chars": "左",
+            "tags": "BODY-B"
+        },
+        {
+            "chars": "髋",
+            "tags": "BODY-I"
+        },
+        {
+            "chars": "部",
+            "tags": "BODY-I"
+        },
+        {
+            "chars": "X",
+            "tags": "O"
+        },
+        {
+            "chars": "光",
+            "tags": "O"
+        },
+        {
+            "chars": "片",
+            "tags": "O"
+        },
+        {
+            "chars": "示",
+            "tags": "O"
+        },
+        {
+            "chars": "：",
+            "tags": "SIGNS-B"
+        },
+        {
+            "chars": "左",
+            "tags": "SIGNS-I"
+        },
+        {
+            "chars": "侧",
+            "tags": "O"
+        },
+        {
+            "chars": "粗",
+            "tags": "BODY-B"
+        },
+        {
+            "chars": "隆",
+            "tags": "BODY-I"
+        },
+        {
+            "chars": "间",
+            "tags": "BODY-I"
+        },
+        {
+            "chars": "骨",
+            "tags": "CHECK-B"
+        },
+        {
+            "chars": "折",
+            "tags": "CHECK-I"
+        },
+        {
+            "chars": "。",
+            "tags": "O"
+        },
+        {
+            "chars": "给",
+            "tags": "O"
+        },
+        {
+            "chars": "予",
+            "tags": "O"
+        },
+        {
+            "chars": "补",
+            "tags": "CHECK-B"
+        },
+        {
+            "chars": "液",
+            "tags": "CHECK-I"
+        },
+        {
+            "chars": "等",
+            "tags": "CHECK-I"
+        },
+        {
+            "chars": "对",
+            "tags": "O"
+        },
+        {
+            "chars": "症",
+            "tags": "O"
+        },
+        {
+            "chars": "治",
+            "tags": "O"
+        },
+        {
+            "chars": "疗",
+            "tags": "BODY-B"
+        },
+        {
+            "chars": "。",
+            "tags": "BODY-I"
+        },
+        {
+            "chars": "患",
+            "tags": "BODY-I"
+        },
+        {
+            "chars": "者",
+            "tags": "BODY-I"
+        },
+        {
+            "chars": "病",
+            "tags": "O"
+        },
+        {
+            "chars": "情",
+            "tags": "O"
+        },
+        {
+            "chars": "平",
+            "tags": "O"
+        },
+        {
+            "chars": "稳",
+            "tags": "O"
+        },
+        {
+            "chars": "，",
+            "tags": "O"
+        },
+        {
+            "chars": "以",
+            "tags": "BODY-B"
+        },
+        {
+            "chars": "左",
+            "tags": "BODY-I"
+        },
+        {
+            "chars": "侧",
+            "tags": "BODY-I"
+        },
+        {
+            "chars": "粗",
+            "tags": "BODY-I"
+        },
+        {
+            "chars": "隆",
+            "tags": "BODY-I"
+        },
+        {
+            "chars": "间",
+            "tags": "O"
+        },
+        {
+            "chars": "骨",
+            "tags": "O"
+        },
+        {
+            "chars": "折",
+            "tags": "O"
+        },
+        {
+            "chars": "介",
+            "tags": "O"
+        },
+        {
+            "chars": "绍",
+            "tags": "BODY-B"
+        },
+        {
+            "chars": "入",
+            "tags": "BODY-I"
+        },
+        {
+            "chars": "院",
+            "tags": "O"
+        },
+        {
+            "chars": "。",
+            "tags": "O"
+        },
+        {
+            "chars": "患",
+            "tags": "O"
+        },
+        {
+            "chars": "者",
+            "tags": "O"
+        },
+        {
+            "chars": "自",
+            "tags": "O"
+        },
+        {
+            "chars": "入",
+            "tags": "O"
+        },
+        {
+            "chars": "院",
+            "tags": "O"
+        },
+        {
+            "chars": "以",
+            "tags": "O"
+        },
+        {
+            "chars": "来",
+            "tags": "O"
+        },
+        {
+            "chars": "，",
+            "tags": "O"
+        },
+        {
+            "chars": "无",
+            "tags": "O"
+        },
+        {
+            "chars": "发",
+            "tags": "O"
+        },
+        {
+            "chars": "热",
+            "tags": "O"
+        },
+        {
+            "chars": "，",
+            "tags": "O"
+        },
+        {
+            "chars": "无",
+            "tags": "O"
+        },
+        {
+            "chars": "头",
+            "tags": "O"
+        },
+        {
+            "chars": "晕",
+            "tags": "CHECK-B"
+        },
+        {
+            "chars": "头",
+            "tags": "CHECK-I"
+        },
+        {
+            "chars": "痛",
+            "tags": "CHECK-I"
+        },
+        {
+            "chars": "，",
+            "tags": "CHECK-I"
+        },
+        {
+            "chars": "无",
+            "tags": "CHECK-I"
+        },
+        {
+            "chars": "恶",
+            "tags": "CHECK-I"
+        },
+        {
+            "chars": "心",
+            "tags": "CHECK-I"
+        },
+        {
+            "chars": "呕",
+            "tags": "O"
+        },
+        {
+            "chars": "吐",
+            "tags": "BODY-B"
+        },
+        {
+            "chars": "，",
+            "tags": "BODY-I"
+        },
+        {
+            "chars": "无",
+            "tags": "BODY-I"
+        },
+        {
+            "chars": "胸",
+            "tags": "BODY-I"
+        },
+        {
+            "chars": "闷",
+            "tags": "BODY-I"
+        },
+        {
+            "chars": "心",
+            "tags": "BODY-I"
+        },
+        {
+            "chars": "悸",
+            "tags": "BODY-I"
+        },
+        {
+            "chars": "，",
+            "tags": "SIGNS-B"
+        },
+        {
+            "chars": "饮",
+            "tags": "SIGNS-I"
+        },
+        {
+            "chars": "食",
+            "tags": "O"
+        }
+    ]
+}
