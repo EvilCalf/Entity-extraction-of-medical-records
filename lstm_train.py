@@ -35,7 +35,7 @@ class LSTMNER:
             'DISEASE-B': 10
         }
         self.EMBEDDING_DIM = 300
-        self.EPOCHS = 20
+        self.EPOCHS = 100
         self.BATCH_SIZE = 256
         self.NUM_CLASSES = len(self.class_dict)
         self.VOCAB_SIZE = len(self.word_dict)
