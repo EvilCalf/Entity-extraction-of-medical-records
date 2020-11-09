@@ -1,0 +1,52 @@
+{
+    "data": [
+        {
+            "chars": "某",
+            "tags": "O"
+        },
+        {
+            "chars": "患",
+            "tags": "O"
+        },
+        {
+            "chars": "者",
+            "tags": "O"
+        },
+        {
+            "chars": "，",
+            "tags": "O"
+        },
+        {
+            "chars": "腿",
+            "tags": "BODY-B"
+        },
+        {
+            "chars": "部",
+            "tags": "BODY-I"
+        },
+        {
+            "chars": "骨",
+            "tags": "SIGNS-B"
+        },
+        {
+            "chars": "折",
+            "tags": "SIGNS-I"
+        },
+        {
+            "chars": "，",
+            "tags": "O"
+        },
+        {
+            "chars": "疼",
+            "tags": "SIGNS-B"
+        },
+        {
+            "chars": "痛",
+            "tags": "SIGNS-I"
+        },
+        {
+            "chars": "。",
+            "tags": "O"
+        }
+    ]
+}
