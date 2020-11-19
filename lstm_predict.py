@@ -49,7 +49,7 @@ class LSTMNER:
     '加载词表'
 
     def load_worddict(self):
-        vocabs = [line.strip() for line in open(self.vocab_path)]
+        vocabs = [line.strip() for line in open(self.vocab_path,encoding='utf-8')]
         word_dict = {wd: index for index, wd in enumerate(vocabs)}
         return word_dict
 
@@ -71,17 +71,13 @@ class LSTMNER:
         chars = [i for i in text]
         tags = [self.label_dict[i] for i in result][len(result)-len(text):]
         res = list(zip(chars, tags))
-        with open("data_out_json/"+file.replace(".txt", "")+".json", 'w', encoding='utf-8') as file_obj:
-            ans_json = {'data': [{'chars': i[0], 'tags': i[1]}
-                                 for i in res]}
-            json.dump(ans_json, file_obj, indent=4, ensure_ascii=False)
         return res
 
     '''加载预训练词向量'''
 
     def load_pretrained_embedding(self):
         embeddings_dict = {}
-        with open(self.embedding_file, 'r') as f:
+        with open(self.embedding_file, 'r',encoding='utf-8') as f:
             for line in f:
                 values = line.strip().split(' ')
                 if len(values) < 300:
@@ -130,9 +126,17 @@ class LSTMNER:
 
 if __name__ == '__main__':
     ner = LSTMNER()
+    res=[]
+    ans_json=[]
     for root, dirs, files in os.walk("data_out"):
         for file in files:
-            with open(root+"/"+file, "r") as f:
+            with open(root+"/"+file, "r",encoding='utf-8') as f:
                 reader = csv.reader(f)
                 result = list(reader)
-                print(result)
+                for i, strs in enumerate(result):
+                    ans=ner.predict(strs[0])
+                    res.append(ans)
+                with open("data_out_json/"+file.replace(".txt", "")+".json", 'w', encoding='utf-8') as file_obj:
+                    for i, strs in enumerate(res):
+                        ans_json.append({'data': [{'chars': index[0], 'tags': index[1]} for index in res[i]]})
+                    json.dump(ans_json, file_obj, indent=4, ensure_ascii=False)
