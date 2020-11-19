@@ -39,7 +39,7 @@ class LSTMNER:
         self.BATCH_SIZE = 128
         self.NUM_CLASSES = len(self.class_dict)
         self.VOCAB_SIZE = len(self.word_dict)
-        self.TIME_STAMPS = 50  # 最长病历文本长度(这里长度过长，不足的位置补0，会严重影响训练结果)
+        self.TIME_STAMPS = 150  # 最长病历文本长度(这里长度过长，不足的位置补0，会严重影响训练结果)
         self.embedding_matrix = self.build_embedding_matrix()
 
     '''构造数据集'''
