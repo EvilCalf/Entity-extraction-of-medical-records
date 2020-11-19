@@ -1,3 +1,4 @@
+import csv
 import json
 import os
 
@@ -132,6 +133,6 @@ if __name__ == '__main__':
     for root, dirs, files in os.walk("data_out"):
         for file in files:
             with open(root+"/"+file, "r") as f:
-                data = f.read()
-                ans = ner.predict(data)
-                print(ans)
+                reader = csv.reader(f)
+                result = list(reader)
+                print(result)
