@@ -7,11 +7,11 @@ class TransferData:
         cur = '/'.join(os.path.abspath(__file__).split('/')[:-1])
         self.label_dict = {
             '检查和检验': 'CHECK',
-            '症状和体征': 'BODY',
+            '症状和体征': 'SIGN',
             '疾病和诊断': 'DISEASE',
             '治疗': 'TREATMENT',
-            '身体部位': 'BODY',
-            '药品': 'TREATMENT'}
+            '身体部位': 'BODY'
+            }
 
         self.cate_dict = {
             'O': 0,
@@ -23,6 +23,8 @@ class TransferData:
             'CHECK-I': 6,
             'DISEASE-B': 7,
             'DISEASE-I': 8,
+            'SIGN-B': 9,
+            'SIGN-I': 10,
         }
         self.origin_path = os.path.join(cur, 'data_origin')
         self.train_filepath = os.path.join(cur, 'train/data_origin.txt')

@@ -9,7 +9,8 @@ class TransferData:
             '疾病和诊断': 'DISEASE',
             '手术': 'TREATMENT',
             '解剖部位': 'BODY',
-            '药物': 'TREATMENT'}
+            '药品': 'TREATMENT'
+            }
 
         self.cate_dict = {
             'O': 0,

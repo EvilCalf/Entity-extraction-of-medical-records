@@ -21,6 +21,8 @@ class TransferData:
             'CHECK-I': 6,
             'DISEASE-B': 7,
             'DISEASE-I': 8,
+            'SIGN-B': 9,
+            'SIGN-I': 10,
         }
         self.entity_dirpath = "yidu"
         return
