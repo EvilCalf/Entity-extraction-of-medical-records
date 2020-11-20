@@ -10,7 +10,8 @@ class TransferData:
             '症状和体征': 'SIGNS',
             '疾病和诊断': 'DISEASE',
             '治疗': 'TREATMENT',
-            '身体部位': 'BODY'}
+            '身体部位': 'BODY',
+            '药品': 'TRUGS'}
 
         self.cate_dict = {
             'O': 0,
@@ -23,7 +24,9 @@ class TransferData:
             'CHECK-B': 7,
             'CHECK-I': 8,
             'DISEASE-I': 9,
-            'DISEASE-B': 10
+            'DISEASE-B': 10,
+            'TRUGS-B': 11,
+            'TRUGS-I': 12
         }
         self.origin_path = os.path.join(cur, 'data_origin')
         self.train_filepath = os.path.join(cur, 'train.txt')

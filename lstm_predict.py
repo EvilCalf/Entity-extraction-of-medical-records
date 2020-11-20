@@ -34,7 +34,9 @@ class LSTMNER:
             'CHECK-B': 7,
             'CHECK-I': 8,
             'DISEASE-I': 9,
-            'DISEASE-B': 10
+            'DISEASE-B': 10,
+            'DRUGS-B': 11,
+            'DRUGS-I': 12
         }
         self.label_dict = {j: i for i, j in self.class_dict.items()}
         self.EMBEDDING_DIM = 300
