@@ -15,7 +15,7 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 class LSTMNER:
     def __init__(self):
         cur = '/'.join(os.path.abspath(__file__).split('/')[:-1])
-        self.train_path = os.path.join(cur, 'data/train.txt')
+        self.train_path = os.path.join(cur, 'train/data_origin.txt')
         self.vocab_path = os.path.join(cur, 'model/vocab.txt')
         self.embedding_file = os.path.join(cur, 'model/token_vec_300.bin') # 可自行修改预训练词向量
         self.model_path = os.path.join(
