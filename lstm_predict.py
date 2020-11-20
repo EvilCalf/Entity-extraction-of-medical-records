@@ -18,7 +18,7 @@ class LSTMNER:
         cur = '/'.join(os.path.abspath(__file__).split('/')[:-1])
         self.train_path = os.path.join(cur, 'data/train.txt')
         self.vocab_path = os.path.join(cur, 'model/vocab.txt')
-        self.embedding_file = os.path.join(cur, 'model/token_vec_300.bin')
+        self.embedding_file = os.path.join(cur, 'model/sgns.target.word-character.char1-2.dynwin5.thr10.neg5.dim300.iter5') # 可自行修改预训练词向量
         self.model_path = os.path.join(
             cur, 'model/tokenvec_bilstm2_crf_model_20.h5')
         self.word_dict = self.load_worddict()

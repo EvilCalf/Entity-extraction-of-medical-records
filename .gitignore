@@ -70,3 +70,6 @@ __pycache__
 
 # cache
 /Cache/*.jpg
+
+# model
+/model/sgns.target.word-character.char1-2.dynwin5.thr10.neg5.dim300.iter5
