@@ -21,8 +21,6 @@ class TransferData:
             'CHECK-I': 6,
             'DISEASE-B': 7,
             'DISEASE-I': 8,
-            'DRUGS-B': 9,
-            'DRUGS-I': 10
         }
         self.entity_dirpath = "Medical Entity"
         return

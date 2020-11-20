@@ -31,8 +31,6 @@ class LSTMNER:
             'CHECK-I': 6,
             'DISEASE-B': 7,
             'DISEASE-I': 8,
-            'DRUGS-B': 9,
-            'DRUGS-I': 10
         }
         self.EMBEDDING_DIM = 300
         self.EPOCHS = 10

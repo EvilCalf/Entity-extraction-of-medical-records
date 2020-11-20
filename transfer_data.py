@@ -23,8 +23,6 @@ class TransferData:
             'CHECK-I': 6,
             'DISEASE-B': 7,
             'DISEASE-I': 8,
-            'DRUGS-B': 9,
-            'DRUGS-I': 10
         }
         self.origin_path = os.path.join(cur, 'data_origin')
         self.train_filepath = os.path.join(cur, 'train/data_origin.txt')

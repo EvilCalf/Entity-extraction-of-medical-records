@@ -9,7 +9,7 @@ class TransferData:
             '疾病和诊断': 'DISEASE',
             '手术': 'TREATMENT',
             '解剖部位': 'BODY',
-            '药物': 'DRUGS'}
+            '药物': 'TREATMENT'}
 
         self.cate_dict = {
             'O': 0,
@@ -21,8 +21,6 @@ class TransferData:
             'CHECK-I': 6,
             'DISEASE-B': 7,
             'DISEASE-I': 8,
-            'DRUGS-B': 9,
-            'DRUGS-I': 10
         }
         self.entity_dirpath = "yidu"
         return
