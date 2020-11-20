@@ -11,7 +11,7 @@ class TransferData:
             '疾病和诊断': 'DISEASE',
             '治疗': 'TREATMENT',
             '身体部位': 'BODY',
-            '药品': 'DRUGS'}
+            '药品': 'TREATMENT'}
 
         self.cate_dict = {
             'O': 0,
