@@ -18,7 +18,8 @@ class LSTMNER:
         cur = '/'.join(os.path.abspath(__file__).split('/')[:-1])
         self.train_path = os.path.join(cur, 'data/train.txt')
         self.vocab_path = os.path.join(cur, 'model/vocab.txt')
-        self.embedding_file = os.path.join(cur, 'model/sgns.target.word-character.char1-2.dynwin5.thr10.neg5.dim300.iter5') # 可自行修改预训练词向量
+        self.embedding_file = os.path.join(
+            cur, 'model/sgns.target.word-character.char1-2.dynwin5.thr10.neg5.dim300.iter5')  # 可自行修改预训练词向量
         self.model_path = os.path.join(
             cur, 'model/tokenvec_bilstm2_crf_model_20.h5')
         self.word_dict = self.load_worddict()
@@ -49,7 +50,8 @@ class LSTMNER:
     '加载词表'
 
     def load_worddict(self):
-        vocabs = [line.strip() for line in open(self.vocab_path,encoding='utf-8')]
+        vocabs = [line.strip()
+                  for line in open(self.vocab_path, encoding='utf-8')]
         word_dict = {wd: index for index, wd in enumerate(vocabs)}
         return word_dict
 
@@ -77,7 +79,7 @@ class LSTMNER:
 
     def load_pretrained_embedding(self):
         embeddings_dict = {}
-        with open(self.embedding_file, 'r',encoding='utf-8') as f:
+        with open(self.embedding_file, 'r', encoding='utf-8') as f:
             for line in f:
                 values = line.strip().split(' ')
                 if len(values) < 300:
@@ -126,17 +128,18 @@ class LSTMNER:
 
 if __name__ == '__main__':
     ner = LSTMNER()
-    res=[]
-    ans_json=[]
+    res = []
+    ans_json = []
     for root, dirs, files in os.walk("data_out"):
         for file in files:
-            with open(root+"/"+file, "r",encoding='utf-8') as f:
+            with open(root+"/"+file, "r", encoding='utf-8') as f:
                 reader = csv.reader(f)
                 result = list(reader)
                 for i, strs in enumerate(result):
-                    ans=ner.predict(strs[0])
+                    ans = ner.predict(strs[0])
                     res.append(ans)
                 with open("data_out_json/"+file.replace(".txt", "")+".json", 'w', encoding='utf-8') as file_obj:
                     for i, strs in enumerate(res):
-                        ans_json.append({'data': [{'chars': index[0], 'tags': index[1]} for index in res[i]]})
+                        ans_json.append(
+                            {'data': [{'chars': index[0], 'tags': index[1]} for index in res[i]]})
                     json.dump(ans_json, file_obj, indent=4, ensure_ascii=False)
