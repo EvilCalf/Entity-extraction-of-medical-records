@@ -19,7 +19,7 @@ class LSTMNER:
         self.train_path = os.path.join(cur, 'data/train.txt')
         self.vocab_path = os.path.join(cur, 'model/vocab.txt')
         self.embedding_file = os.path.join(
-            cur, 'model/sgns.target.word-character.char1-2.dynwin5.thr10.neg5.dim300.iter5')  # 可自行修改预训练词向量
+            cur, 'model/token_vec_300.bin')  # 可自行修改预训练词向量
         self.model_path = os.path.join(
             cur, 'model/tokenvec_bilstm2_crf_model_20.h5')
         self.word_dict = self.load_worddict()
@@ -135,9 +135,11 @@ if __name__ == '__main__':
             with open(root+"/"+file, "r", encoding='utf-8') as f:
                 reader = csv.reader(f)
                 result = list(reader)
+                total = len(result)
                 for i, strs in enumerate(result):
                     ans = ner.predict(strs[0])
                     res.append(ans)
+                    print(str(i)+"/"+str(total-1))
                 with open("data_out_json/"+file.replace(".txt", "")+".json", 'w', encoding='utf-8') as file_obj:
                     for i, strs in enumerate(res):
                         ans_json.append(
