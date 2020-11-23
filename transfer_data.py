@@ -6,9 +6,14 @@ class TransferData:
     def __init__(self):
         cur = '/'.join(os.path.abspath(__file__).split('/')[:-1])
         self.label_dict = {
-            '检查和检验': 'CHECK',
-            '症状和体征': 'SIGN',
+            '影像检查': 'TEST',
+            '实验室检验': 'TEST',
             '疾病和诊断': 'DISEASE',
+            '手术': 'PROCEDURE',
+            '解剖部位': 'BODY',
+            '药物': 'DRUGS',
+            '检查和检验': 'TEST',
+            '症状和体征': 'SIGN',
             '治疗': 'TREATMENT',
             '身体部位': 'BODY'
             }
@@ -19,8 +24,8 @@ class TransferData:
             'TREATMENT-B': 2,
             'BODY-B': 3,
             'BODY-I': 4,
-            'CHECK-B': 5,
-            'CHECK-I': 6,
+            'TEST-B': 5,
+            'TEST-I': 6,
             'DISEASE-B': 7,
             'DISEASE-I': 8,
             'SIGN-B': 9,

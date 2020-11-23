@@ -4,12 +4,16 @@ import os
 class TransferData:
     def __init__(self):
         self.label_dict = {
-            '影像检查': 'CHECK',
-            '实验室检验': 'CHECK',
+            '影像检查': 'TEST',
+            '实验室检验': 'TEST',
             '疾病和诊断': 'DISEASE',
-            '手术': 'TREATMENT',
+            '手术': 'PROCEDURE',
             '解剖部位': 'BODY',
-            '药品': 'TREATMENT'
+            '药物': 'DRUGS',
+            '检查和检验': 'TEST',
+            '症状和体征': 'SIGN',
+            '治疗': 'TREATMENT',
+            '身体部位': 'BODY'
             }
 
         self.cate_dict = {
@@ -18,10 +22,12 @@ class TransferData:
             'TREATMENT-B': 2,
             'BODY-B': 3,
             'BODY-I': 4,
-            'CHECK-B': 5,
-            'CHECK-I': 6,
+            'TEST-B': 5,
+            'TEST-I': 6,
             'DISEASE-B': 7,
             'DISEASE-I': 8,
+            'SIGN-B': 9,
+            'SIGN-I': 10,
         }
         self.entity_dirpath = "Medical Entity"
         return
