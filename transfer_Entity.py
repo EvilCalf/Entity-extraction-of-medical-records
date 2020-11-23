@@ -7,7 +7,7 @@ class TransferData:
             '影像检查': 'TEST',
             '实验室检验': 'TEST',
             '疾病和诊断': 'DISEASE',
-            '手术': 'PROCEDURE',
+            '手术': 'TREATMENT',
             '解剖部位': 'BODY',
             '药物': 'DRUGS',
             '检查和检验': 'TEST',
@@ -18,8 +18,8 @@ class TransferData:
 
         self.cate_dict = {
             'O': 0,
-            'TREATMENT-I': 1,
-            'TREATMENT-B': 2,
+            'TREATMENT-B': 1,
+            'TREATMENT-I': 2,
             'BODY-B': 3,
             'BODY-I': 4,
             'TEST-B': 5,
