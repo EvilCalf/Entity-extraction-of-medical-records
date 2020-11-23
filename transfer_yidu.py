@@ -49,8 +49,9 @@ class TransferData:
                                 res_dict[i] = label_cate
                         for indx, char in enumerate(content):
                             char_label = res_dict.get(indx, 'O')
-                            print(char, char_label)
-                            f.write(char + '\t' + char_label + '\n')
+                            if char !=' ':
+                                print(char, char_label)
+                                f.write(char + '\t' + char_label + '\n')
         f.close()
         return
 
