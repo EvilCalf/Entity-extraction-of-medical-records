@@ -25,6 +25,8 @@ class TransferData:
             'BODY-I': 8,
             'DRUGS-B': 9,
             'DRUGS-I': 10,
+            'TREATMENT-B': 11,
+            'TREATMENT-I': 12,
         }
         self.entity_dirpath = "yidu"
         self.train_filepath = "train/yidu_train.txt"

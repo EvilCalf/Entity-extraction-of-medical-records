@@ -35,6 +35,8 @@ class LSTMNER:
             'BODY-I': 8,
             'DRUGS-B': 9,
             'DRUGS-I': 10,
+            'TREATMENT-B': 11,
+            'TREATMENT-I': 12,
         }
         self.label_dict = {j: i for i, j in self.class_dict.items()}
         self.EMBEDDING_DIM = 300
