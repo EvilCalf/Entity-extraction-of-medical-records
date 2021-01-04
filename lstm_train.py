@@ -146,7 +146,7 @@ class LSTMNER:
         model = self.tokenvec_bilstm2_crf_model()
         callbacks_list = [
             keras.callbacks.History(),
-            keras.callbacks.ModelCheckpoint("PixelCNN_Classify.h5", monitor='acc', verbose=1,
+            keras.callbacks.ModelCheckpoint("tokenvec_bilstm2_crf_model_20.h5", monitor='acc', verbose=1,
                                             save_best_only=True, save_weights_only=True, mode='auto', period=1),
             keras.callbacks.ReduceLROnPlateau(monitor='loss', factor=0.5, patience=5,
                                               verbose=1, mode='auto', min_lr=0.00001),
@@ -155,7 +155,6 @@ class LSTMNER:
         ]
         history = model.fit(x_train[:], y_train[:], validation_split=0.2,
                             batch_size=self.BATCH_SIZE, epochs=self.EPOCHS, callbacks=callbacks_list)
-        model.save(self.model_path)
         return model
 
 
