@@ -150,11 +150,11 @@ class LSTMNER:
                                             save_best_only=True, save_weights_only=True, mode='auto', period=1),
             keras.callbacks.ReduceLROnPlateau(monitor='loss', factor=0.5, patience=5,
                                               verbose=1, mode='auto', min_lr=0.00001),
-            keras.callbacks.EarlyStopping(monitor='acc', min_delta=0.001, patience=10,
-                                          verbose=0, mode='auto', baseline=None, restore_best_weights=False)
+            keras.callbacks.EarlyStopping(
+                monitor='acc', min_delta=0.001, patience=10, verbose=0, mode='auto')
         ]
         history = model.fit(x_train[:], y_train[:], validation_split=0.2,
-                            batch_size=self.BATCH_SIZE, epochs=self.EPOCHS,callbacks=callbacks_list)
+                            batch_size=self.BATCH_SIZE, epochs=self.EPOCHS, callbacks=callbacks_list)
         model.save(self.model_path)
         return model
 
