@@ -8,6 +8,7 @@ from keras.models import Sequential
 from keras.preprocessing.sequence import pad_sequences
 
 from keras_contrib.layers.crf import CRF
+import keras
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
@@ -17,11 +18,12 @@ class LSTMNER:
         cur = '/'.join(os.path.abspath(__file__).split('/')[:-1])
         self.train_path = os.path.join(cur, 'train/yidu_train.txt')
         self.vocab_path = os.path.join(cur, 'model/vocab.txt')
-        self.embedding_file = os.path.join(cur, 'model/token_vec_300.bin') # 可自行修改预训练词向量
+        self.embedding_file = os.path.join(
+            cur, 'model/token_vec_300.bin')  # 可自行修改预训练词向量
         self.model_path = os.path.join(
             cur, 'model/tokenvec_bilstm2_crf_model_20.h5')
         self.datas, self.word_dict = self.build_data()
-        self.class_dict ={
+        self.class_dict = {
             'O': 0,
             'DISEASE-B': 1,
             'DISEASE-I': 2,
@@ -33,7 +35,7 @@ class LSTMNER:
             'BODY-I': 8,
             'DRUGS-B': 9,
             'DRUGS-I': 10,
-                        }
+        }
         self.EMBEDDING_DIM = 300
         self.EPOCHS = 10
         self.BATCH_SIZE = 128
@@ -140,8 +142,17 @@ class LSTMNER:
     def train_model(self):
         x_train, y_train = self.modify_data()
         model = self.tokenvec_bilstm2_crf_model()
+        callbacks_list = [
+            keras.callbacks.History(),
+            keras.callbacks.ModelCheckpoint("PixelCNN_Classify.h5", monitor='acc', verbose=1,
+                                            save_best_only=True, save_weights_only=True, mode='auto', period=1),
+            keras.callbacks.ReduceLROnPlateau(monitor='loss', factor=0.5, patience=5,
+                                              verbose=1, mode='auto', min_lr=0.00001),
+            keras.callbacks.EarlyStopping(monitor='acc', min_delta=0.001, patience=10,
+                                          verbose=0, mode='auto', baseline=None, restore_best_weights=False)
+        ]
         history = model.fit(x_train[:], y_train[:], validation_split=0.2,
-                            batch_size=self.BATCH_SIZE, epochs=self.EPOCHS)
+                            batch_size=self.BATCH_SIZE, epochs=self.EPOCHS,callbacks=callbacks_list)
         model.save(self.model_path)
         return model
 
