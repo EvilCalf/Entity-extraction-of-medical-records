@@ -39,7 +39,7 @@ class LSTMNER:
             'TREATMENT-I': 12,
         }
         self.EMBEDDING_DIM = 300
-        self.EPOCHS = 10
+        self.EPOCHS = 100
         self.BATCH_SIZE = 128
         self.NUM_CLASSES = len(self.class_dict)
         self.VOCAB_SIZE = len(self.word_dict)
@@ -151,7 +151,7 @@ class LSTMNER:
             keras.callbacks.ReduceLROnPlateau(monitor='loss', factor=0.5, patience=5,
                                               verbose=1, mode='auto', min_lr=0.00001),
             keras.callbacks.EarlyStopping(
-                monitor='acc', min_delta=0.001, patience=10, verbose=0, mode='auto')
+                monitor='acc', min_delta=0.001, patience=6, verbose=0, mode='auto')
         ]
         history = model.fit(x_train[:], y_train[:], validation_split=0.2,
                             batch_size=self.BATCH_SIZE, epochs=self.EPOCHS, callbacks=callbacks_list)

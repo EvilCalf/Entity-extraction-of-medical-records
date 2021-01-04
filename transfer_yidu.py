@@ -47,7 +47,7 @@ class TransferData:
                     end = int(i[1]['end_pos'])
                     label = i[1]["label_type"]
                     label_id = self.label_dict.get(label)
-                    for i in range(start, end+1):
+                    for i in range(start, end):
                         if i == start:
                             label_cate = label_id + '-B'
                         else:
@@ -55,6 +55,9 @@ class TransferData:
                         res_dict[i] = label_cate
                 for indx, char in enumerate(content):
                     char_label = res_dict.get(indx, 'O')
+                    word_list=['。']
+                    if char in word_list:
+                        char_label='O'
                     if char != ' ':
                         f.write(char + '\t' + char_label + '\n')
                 print("%s 完成！" % json_path)
