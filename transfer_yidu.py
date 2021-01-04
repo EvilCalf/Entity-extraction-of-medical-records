@@ -4,17 +4,13 @@ import json
 class TransferData:
     def __init__(self):
         self.label_dict = {
-            '影像检查': 'TESTPROC',
-            '实验室检验': 'TESTPROC',
             '疾病和诊断': 'DISEASE',
+            '检查': 'TESTPROC',
+            '检验': 'TESTLAB',
             '手术': 'TREATMENT',
             '解剖部位': 'SIGN',
             '药物': 'DRUGS',
-            '检查和检验': 'TESTPROC',
-            '症状和体征': 'SYMPTOM',
-            '治疗': 'TREATMENT',
-            '身体部位': 'SIGN'
-            }
+        }
 
         self.cate_dict = {
             'O': 0,
