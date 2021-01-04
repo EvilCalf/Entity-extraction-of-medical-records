@@ -15,31 +15,31 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 class LSTMNER:
     def __init__(self):
         cur = '/'.join(os.path.abspath(__file__).split('/')[:-1])
-        self.train_path = os.path.join(cur, 'train/train.txt')
+        self.train_path = os.path.join(cur, 'train/yidu_train.txt')
         self.vocab_path = os.path.join(cur, 'model/vocab.txt')
         self.embedding_file = os.path.join(cur, 'model/token_vec_300.bin') # 可自行修改预训练词向量
         self.model_path = os.path.join(
             cur, 'model/tokenvec_bilstm2_crf_model_20.h5')
         self.datas, self.word_dict = self.build_data()
         self.class_dict ={
-                         'O':0,
-                         'TREATMENT-I': 1,
-                         'TREATMENT-B': 2,
-                         'BODY-B': 3,
-                         'BODY-I': 4,
-                         'SIGNS-I': 5,
-                         'SIGNS-B': 6,
-                         'CHECK-B': 7,
-                         'CHECK-I': 8,
-                         'DISEASE-I': 9,
-                         'DISEASE-B': 10
+            'O': 0,
+            'DISEASE-B': 1,
+            'DISEASE-I': 2,
+            'TESTPROC-B': 3,
+            'TESTPROC-I': 4,
+            'TESTLAB-B': 5,
+            'TESTLAB-I': 6,
+            'BODY-B': 7,
+            'BODY-I': 8,
+            'DRUGS-B': 9,
+            'DRUGS-I': 10,
                         }
         self.EMBEDDING_DIM = 300
         self.EPOCHS = 10
         self.BATCH_SIZE = 128
         self.NUM_CLASSES = len(self.class_dict)
         self.VOCAB_SIZE = len(self.word_dict)
-        self.TIME_STAMPS = 150  # 最长病历文本长度(这里长度过长，不足的位置补0，会严重影响训练结果)
+        self.TIME_STAMPS = 250  # 最长病历文本长度(这里长度过长，不足的位置补0，会严重影响训练结果)
         self.embedding_matrix = self.build_embedding_matrix()
 
     '''构造数据集'''

@@ -23,19 +23,19 @@ class LSTMNER:
         self.model_path = os.path.join(
             cur, 'model/tokenvec_bilstm2_crf_model_20.h5')
         self.word_dict = self.load_worddict()
-        self.class_dict ={
-                         'O':0,
-                         'TREATMENT-I': 1,
-                         'TREATMENT-B': 2,
-                         'BODY-B': 3,
-                         'BODY-I': 4,
-                         'SIGNS-I': 5,
-                         'SIGNS-B': 6,
-                         'CHECK-B': 7,
-                         'CHECK-I': 8,
-                         'DISEASE-I': 9,
-                         'DISEASE-B': 10
-                        }
+        self.class_dict = {
+            'O': 0,
+            'DISEASE-B': 1,
+            'DISEASE-I': 2,
+            'TESTPROC-B': 3,
+            'TESTPROC-I': 4,
+            'TESTLAB-B': 5,
+            'TESTLAB-I': 6,
+            'BODY-B': 7,
+            'BODY-I': 8,
+            'DRUGS-B': 9,
+            'DRUGS-I': 10,
+        }
         self.label_dict = {j: i for i, j in self.class_dict.items()}
         self.EMBEDDING_DIM = 300
         self.EPOCHS = 10
