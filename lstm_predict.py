@@ -16,26 +16,26 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 class LSTMNER:
     def __init__(self):
         cur = '/'.join(os.path.abspath(__file__).split('/')[:-1])
-        self.train_path = os.path.join(cur, 'train/data_origin.txt')
+        self.train_path = os.path.join(cur, 'train/train.txt')
         self.vocab_path = os.path.join(cur, 'model/vocab.txt')
         self.embedding_file = os.path.join(
             cur, 'model/token_vec_300.bin')  # 可自行修改预训练词向量
         self.model_path = os.path.join(
             cur, 'model/tokenvec_bilstm2_crf_model_20.h5')
         self.word_dict = self.load_worddict()
-        self.class_dict = {
-            'O': 0,
-            'TREATMENT-I': 1,
-            'TREATMENT-B': 2,
-            'BODY-B': 3,
-            'BODY-I': 4,
-            'TEST-B': 5,
-            'TEST-I': 6,
-            'DISEASE-B': 7,
-            'DISEASE-I': 8,
-            'SIGN-B': 9,
-            'SIGN-I': 10,
-        }
+        self.class_dict ={
+                         'O':0,
+                         'TREATMENT-I': 1,
+                         'TREATMENT-B': 2,
+                         'BODY-B': 3,
+                         'BODY-I': 4,
+                         'SIGNS-I': 5,
+                         'SIGNS-B': 6,
+                         'CHECK-B': 7,
+                         'CHECK-I': 8,
+                         'DISEASE-I': 9,
+                         'DISEASE-B': 10
+                        }
         self.label_dict = {j: i for i, j in self.class_dict.items()}
         self.EMBEDDING_DIM = 300
         self.EPOCHS = 10

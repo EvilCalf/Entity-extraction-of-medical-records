@@ -21,19 +21,19 @@ class LSTMNER:
         self.model_path = os.path.join(
             cur, 'model/tokenvec_bilstm2_crf_model_20.h5')
         self.datas, self.word_dict = self.build_data()
-        self.class_dict = {
-            'O': 0,
-            'TREATMENT-I': 1,
-            'TREATMENT-B': 2,
-            'BODY-B': 3,
-            'BODY-I': 4,
-            'TEST-B': 5,
-            'TEST-I': 6,
-            'DISEASE-B': 7,
-            'DISEASE-I': 8,
-            'SIGN-B': 9,
-            'SIGN-I': 10,
-        }
+        self.class_dict ={
+                         'O':0,
+                         'TREATMENT-I': 1,
+                         'TREATMENT-B': 2,
+                         'BODY-B': 3,
+                         'BODY-I': 4,
+                         'SIGNS-I': 5,
+                         'SIGNS-B': 6,
+                         'CHECK-B': 7,
+                         'CHECK-I': 8,
+                         'DISEASE-I': 9,
+                         'DISEASE-B': 10
+                        }
         self.EMBEDDING_DIM = 300
         self.EPOCHS = 10
         self.BATCH_SIZE = 128
