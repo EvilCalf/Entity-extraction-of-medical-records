@@ -56,7 +56,6 @@ class TransferData:
                 for indx, char in enumerate(content):
                     char_label = res_dict.get(indx, 'O')
                     if char != ' ':
-                        print(char, char_label)
                         f.write(char + '\t' + char_label + '\n')
                 print("%s 完成！" % json_path)
         f.close()
