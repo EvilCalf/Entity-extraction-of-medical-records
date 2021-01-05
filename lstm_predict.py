@@ -2,8 +2,9 @@ import csv
 import json
 import os
 
+import keras
 import numpy as np
-from keras.layers import (LSTM, Bidirectional, Dense, Dropout, Embedding,
+from keras.layers import (GRU, LSTM, Bidirectional, Dense, Dropout, Embedding,
                           TimeDistributed)
 from keras.models import Sequential, load_model
 from keras.preprocessing.sequence import pad_sequences
@@ -40,11 +41,11 @@ class LSTMNER:
         }
         self.label_dict = {j: i for i, j in self.class_dict.items()}
         self.EMBEDDING_DIM = 300
-        self.EPOCHS = 10
-        self.BATCH_SIZE = 128
+        self.EPOCHS = 100
+        self.BATCH_SIZE = 64
         self.NUM_CLASSES = len(self.class_dict)
         self.VOCAB_SIZE = len(self.word_dict)
-        self.TIME_STAMPS = 1000  # 最长病历文本长度
+        self.TIME_STAMPS = 1000  # 最长单句长度
         self.embedding_matrix = self.build_embedding_matrix()
         self.model = self.tokenvec_bilstm2_crf_model()
         self.model.load_weights(self.model_path)
@@ -108,21 +109,28 @@ class LSTMNER:
 
     def tokenvec_bilstm2_crf_model(self):
         model = Sequential()
-        embedding_layer = Embedding(self.VOCAB_SIZE + 1,
-                                    self.EMBEDDING_DIM,
-                                    weights=[self.embedding_matrix],
-                                    input_length=self.TIME_STAMPS,
-                                    trainable=False,
-                                    mask_zero=True)
-        model.add(embedding_layer)
-        model.add(Bidirectional(LSTM(128, return_sequences=True)))
+        # embedding_layer = Embedding(self.VOCAB_SIZE + 1,
+        #                             self.EMBEDDING_DIM,
+        #                             weights=[self.embedding_matrix],
+        #                             input_length=self.TIME_STAMPS,
+        #                             trainable=False,
+        #                             mask_zero=True)
+        model.add(Embedding(self.VOCAB_SIZE+1, self.EMBEDDING_DIM,
+                            mask_zero=True))  # Random embedding
+        # model.add(embedding_layer)
+        model.add(Bidirectional(GRU(128, return_sequences=True,
+                                    kernel_regularizer=keras.regularizers.l2(0.01))))
         model.add(Dropout(0.5))
-        model.add(Bidirectional(LSTM(64, return_sequences=True)))
+        model.add(Bidirectional(GRU(64, return_sequences=True,
+                                    kernel_regularizer=keras.regularizers.l2(0.01))))
         model.add(Dropout(0.5))
-        model.add(TimeDistributed(Dense(self.NUM_CLASSES)))
-        crf_layer = CRF(self.NUM_CLASSES, sparse_target=True)
+        model.add(TimeDistributed(Dense(self.NUM_CLASSES,
+                                        kernel_regularizer=keras.regularizers.l2(0.01))))
+        crf_layer = CRF(self.NUM_CLASSES, sparse_target=True,
+                        kernel_regularizer=keras.regularizers.l2(0.01))
         model.add(crf_layer)
-        model.compile('adam', loss=crf_layer.loss_function,
+        Adam = keras.optimizers.adam(lr=0.005)
+        model.compile(Adam, loss=crf_layer.loss_function,
                       metrics=[crf_layer.accuracy])
         model.summary()
         return model
