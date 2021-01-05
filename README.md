@@ -1,4 +1,4 @@
-# Entity-extraction-of-medical-records
+# Entity Extraction of Medical Mecords
 
 - 病历实体化提取
 
