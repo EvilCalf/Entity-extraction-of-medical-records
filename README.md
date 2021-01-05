@@ -1,6 +1,6 @@
 # Entity Extraction of Medical Mecords
 
-- 病历实体化提取
+- 病历实体提取
 
 - 本项目是针对医疗数据，进行命名实体识别。
 
