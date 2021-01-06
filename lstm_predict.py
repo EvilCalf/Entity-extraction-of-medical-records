@@ -45,7 +45,7 @@ class LSTMNER:
         self.BATCH_SIZE = 64
         self.NUM_CLASSES = len(self.class_dict)
         self.VOCAB_SIZE = len(self.word_dict)
-        self.TIME_STAMPS = 1000  # 最长单句长度
+        self.TIME_STAMPS = 1000  # 预测的时候为输入段落的最长长度
         self.embedding_matrix = self.build_embedding_matrix()
         self.model = self.tokenvec_bilstm2_crf_model()
         self.model.load_weights(self.model_path)
