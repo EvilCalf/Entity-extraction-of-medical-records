@@ -28,7 +28,7 @@ class TransferData:
             'TREATMENT-B': 11,
             'TREATMENT-I': 12,
         }
-        self.entity_dirpath = "yidu"
+        self.entity_dirpath = "data/yidu"
         self.train_filepath = "train/yidu_train.txt"
         return
 
