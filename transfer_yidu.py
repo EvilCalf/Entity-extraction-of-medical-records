@@ -28,7 +28,7 @@ class TransferData:
             'TREATMENT-B': 11,
             'TREATMENT-I': 12,
         }
-        self.entity_dirpath = "yidu"
+        self.entity_dirpath = "data/yidu"
         self.train_filepath = "train/yidu_train.txt"
         return
 
@@ -55,9 +55,9 @@ class TransferData:
                         res_dict[i] = label_cate
                 for indx, char in enumerate(content):
                     char_label = res_dict.get(indx, 'O')
-                    word_list=['。']
+                    word_list = ['。']
                     if char in word_list:
-                        char_label='O'
+                        char_label = 'O'
                     if char != ' ':
                         f.write(char + '\t' + char_label + '\n')
                 print("%s 完成！" % json_path)
