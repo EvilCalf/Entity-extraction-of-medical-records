@@ -47,7 +47,6 @@ class LSTMNER:
         self.NUM_CLASSES = len(self.class_dict)
         self.VOCAB_SIZE = len(self.word_dict)
         self.TIME_STAMPS = 1000  # 预测的时候为输入段落的最长长度
-        self.embedding_matrix = self.build_embedding_matrix()
         self.model = self.tokenvec_bilstm2_crf_model()
         self.model.load_weights(self.model_path)
 
@@ -79,33 +78,6 @@ class LSTMNER:
         res = list(zip(chars, tags))
         return res
 
-    '''加载预训练词向量'''
-
-    def load_pretrained_embedding(self):
-        embeddings_dict = {}
-        with open(self.embedding_file, 'r', encoding='utf-8') as f:
-            for line in f:
-                values = line.strip().split(' ')
-                if len(values) < 300:
-                    continue
-                word = values[0]
-                coefs = np.asarray(values[1:], dtype='float32')
-                embeddings_dict[word] = coefs
-        print('Found %s word vectors.' % len(embeddings_dict))
-        return embeddings_dict
-
-    '''加载词向量矩阵'''
-
-    def build_embedding_matrix(self):
-        embedding_dict = self.load_pretrained_embedding()
-        embedding_matrix = np.zeros((self.VOCAB_SIZE + 1, self.EMBEDDING_DIM))
-        for word, i in self.word_dict.items():
-            embedding_vector = embedding_dict.get(word)
-            if embedding_vector is not None:
-                embedding_matrix[i] = embedding_vector
-
-        return embedding_matrix
-
     '''使用预训练向量进行模型训练'''
 
     def tokenvec_bilstm2_crf_model(self):
@@ -119,10 +91,10 @@ class LSTMNER:
         model.add(Embedding(self.VOCAB_SIZE+1, self.EMBEDDING_DIM,
                             mask_zero=True))  # Random embedding
         # model.add(embedding_layer)
-        model.add(Bidirectional(GRU(128, return_sequences=True,
+        model.add(Bidirectional(GRU(256, return_sequences=True,
                                     kernel_regularizer=keras.regularizers.l2(0.01))))
         model.add(Dropout(0.5))
-        model.add(Bidirectional(GRU(64, return_sequences=True,
+        model.add(Bidirectional(GRU(128, return_sequences=True,
                                     kernel_regularizer=keras.regularizers.l2(0.01))))
         model.add(Dropout(0.5))
         model.add(TimeDistributed(Dense(self.NUM_CLASSES,

@@ -39,14 +39,20 @@ class LSTMNER:
             'TREATMENT-I': 12,
         }
         self.EMBEDDING_DIM = 300
-        self.EPOCHS = 1000
-        self.BATCH_SIZE = 64
+        self.EPOCHS = 9999
+        self.BATCH_SIZE = 128
         self.NUM_CLASSES = len(self.class_dict)
         self.VOCAB_SIZE = len(self.word_dict)
         self.TIME_STAMPS = 250  # 最长单句长度
-        self.embedding_matrix = self.build_embedding_matrix()
+        # self.embedding_matrix = self.build_embedding_matrix()
 
     '''构造数据集'''
+
+    def load_worddict(self):
+        vocabs = [line.strip()
+                  for line in open(self.vocab_path, encoding='utf-8')]
+        word_dict = {wd: index for index, wd in enumerate(vocabs)}
+        return word_dict
 
     def build_data(self):
         datas = []
@@ -129,10 +135,10 @@ class LSTMNER:
         model.add(Embedding(self.VOCAB_SIZE+1, self.EMBEDDING_DIM,
                             mask_zero=True))  # Random embedding
         # model.add(embedding_layer)
-        model.add(Bidirectional(GRU(128, return_sequences=True,
+        model.add(Bidirectional(GRU(256, return_sequences=True,
                                     kernel_regularizer=keras.regularizers.l2(0.01))))
         model.add(Dropout(0.5))
-        model.add(Bidirectional(GRU(64, return_sequences=True,
+        model.add(Bidirectional(GRU(128, return_sequences=True,
                                     kernel_regularizer=keras.regularizers.l2(0.01))))
         model.add(Dropout(0.5))
         model.add(TimeDistributed(Dense(self.NUM_CLASSES,
@@ -156,14 +162,12 @@ class LSTMNER:
             keras.callbacks.ModelCheckpoint(self.model_path, monitor='crf_viterbi_accuracy', verbose=1,
                                             save_best_only=True, save_weights_only=True, mode='auto', period=1),
             keras.callbacks.ReduceLROnPlateau(monitor='loss', factor=0.5, patience=5,
-                                              verbose=1, mode='auto', min_lr=0.00001),
-            keras.callbacks.EarlyStopping(
-                monitor='crf_viterbi_accuracy', min_delta=0.001, patience=6, verbose=0, mode='auto')
+                                              verbose=1, mode='auto', min_lr=1e-9),
         ]
         if os.path.exists(self.model_path):
             model.load_weights(self.model_path)
-        history = model.fit(x_train[:], y_train[:], validation_split=0.2,
-                            batch_size=self.BATCH_SIZE, epochs=self.EPOCHS, callbacks=callbacks_list)
+        history = model.fit(x_train[:], y_train[:], batch_size=self.BATCH_SIZE,
+                            epochs=self.EPOCHS, callbacks=callbacks_list)
         return model
 
 
