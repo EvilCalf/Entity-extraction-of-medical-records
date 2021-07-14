@@ -9,6 +9,9 @@ from keras.models import Sequential
 from keras.preprocessing.sequence import pad_sequences
 
 from keras_contrib.layers.crf import CRF
+from keras.callbacks import Callback
+
+import pickle
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
@@ -16,31 +19,47 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 class LSTMNER:
     def __init__(self):
         cur = '/'.join(os.path.abspath(__file__).split('/')[:-1])
-        self.train_path = os.path.join(cur, 'train/yidu_train.txt')
+        self.train_path = os.path.join(cur, 'train/elf_train.txt')
         self.vocab_path = os.path.join(cur, 'model/vocab.txt')
         self.embedding_file = os.path.join(
             cur, 'model/token_vec_300.bin')  # 可自行修改预训练词向量
         self.model_path = os.path.join(
-            cur, 'model/tokenvec_bilstm2_crf_model_20.h5')
+            cur, 'model/model/tokenvec_bilstm2_crf_model_20.h5')
         self.datas, self.word_dict = self.build_data()
         self.class_dict = {
-            'O': 0,
-            'DISEASE-B': 1,
-            'DISEASE-I': 2,
-            'TESTPROC-B': 3,
-            'TESTPROC-I': 4,
-            'TESTLAB-B': 5,
-            'TESTLAB-I': 6,
-            'BODY-B': 7,
-            'BODY-I': 8,
-            'DRUGS-B': 9,
-            'DRUGS-I': 10,
-            'TREATMENT-B': 11,
-            'TREATMENT-I': 12,
+            "O": 0,
+            "B-DISEASE": 1,
+            "I-DISEASE": 2,
+            "B-SIGN": 3,
+            "I-SIGN": 4,
+            "B-MARGIN": 5,
+            "I-MARGIN": 6,
+            "B-DIAMETER": 7,
+            "I-DIAMETER": 8,
+            "B-TESTPROC": 9,
+            "I-TESTPROC": 10,
+            "B-TREATMENT": 11,
+            "I-TREATMENT": 12,
+            "B-ANATOMY": 13,
+            "I-ANATOMY": 14,
+            "B-NATURE": 15,
+            "I-NATURE": 16,
+            "B-SHAPE": 17,
+            "I-SHAPE": 18,
+            "B-DENSITY": 19,
+            "I-DENSITY": 20,
+            "B-BOUNDARY": 21,
+            "I-BOUNDARY": 22,
+            "B-LUNGFIELD": 23,
+            "I-LUNGFIELD": 24,
+            "B-TEXTURE": 25,
+            "I-TEXTURE": 26,
+            "B-TRANSPARENCY": 27,
+            "I-TRANSPARENCY": 28
         }
         self.EMBEDDING_DIM = 300
-        self.EPOCHS = 9999
-        self.BATCH_SIZE = 128
+        self.EPOCHS = 500
+        self.BATCH_SIZE = 32
         self.NUM_CLASSES = len(self.class_dict)
         self.VOCAB_SIZE = len(self.word_dict)
         self.TIME_STAMPS = 250  # 最长单句长度
@@ -146,7 +165,7 @@ class LSTMNER:
         crf_layer = CRF(self.NUM_CLASSES, sparse_target=True,
                         kernel_regularizer=keras.regularizers.l2(0.01))
         model.add(crf_layer)
-        Adam = keras.optimizers.adam(lr=0.005)
+        Adam = keras.optimizers.adamax(lr=0.005)
         model.compile(Adam, loss=crf_layer.loss_function,
                       metrics=[crf_layer.accuracy])
         model.summary()
@@ -159,16 +178,30 @@ class LSTMNER:
         model = self.tokenvec_bilstm2_crf_model()
         callbacks_list = [
             keras.callbacks.History(),
-            keras.callbacks.ModelCheckpoint(self.model_path, monitor='crf_viterbi_accuracy', verbose=1,
-                                            save_best_only=True, save_weights_only=True, mode='auto', period=1),
             keras.callbacks.ReduceLROnPlateau(monitor='loss', factor=0.5, patience=5,
                                               verbose=1, mode='auto', min_lr=1e-9),
+            keras.callbacks.ModelCheckpoint("model/model/tokenvec_bilstm2_crf_model_20.h5", monitor='crf_viterbi_accuracy',
+                                            verbose=0, save_best_only=True, save_weights_only=True, mode='auto', period=1)
+            # WeightsSaver(1)
         ]
         if os.path.exists(self.model_path):
             model.load_weights(self.model_path)
         history = model.fit(x_train[:], y_train[:], batch_size=self.BATCH_SIZE,
                             epochs=self.EPOCHS, callbacks=callbacks_list)
+        with open('trainHistoryDict.txt', 'wb') as file_pi:
+            pickle.dump(history.history, file_pi)
         return model
+
+# class WeightsSaver(Callback):
+#     def __init__(self, N):
+#         self.N = N
+#         self.epoch = 0
+
+#     def on_epoch_end (self, epoch, logs={}):
+#         if self.epoch % self.N == 0:
+#             name = 'model/model/model%08d.h5' % self.epoch
+#             self.model.save_weights(name)
+#         self.epoch += 1
 
 
 if __name__ == '__main__':

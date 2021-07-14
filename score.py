@@ -10,6 +10,8 @@ from keras.models import Sequential
 from keras.preprocessing.sequence import pad_sequences
 
 from keras_contrib.layers.crf import CRF
+from builtins import str
+import pandas as pd
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
@@ -18,7 +20,7 @@ class LSTMNER:
     def __init__(self):
         keras.backend.clear_session()
         cur = '/'.join(os.path.abspath(__file__).split('/')[:-1])
-        self.test_path = os.path.join(cur, 'train/yidu_test.txt')
+        self.test_path = os.path.join(cur, 'train/sict_train.txt')
         self.vocab_path = os.path.join(cur, 'model/vocab.txt')
         self.embedding_file = os.path.join(
             cur, 'model/token_vec_300.bin')  # 可自行修改预训练词向量
@@ -26,19 +28,35 @@ class LSTMNER:
             cur, 'model/tokenvec_bilstm2_crf_model_20.h5')
         self.word_dict = self.load_worddict()
         self.class_dict = {
-            'O': 0,
-            'DISEASE-B': 1,
-            'DISEASE-I': 2,
-            'TESTPROC-B': 3,
-            'TESTPROC-I': 4,
-            'TESTLAB-B': 5,
-            'TESTLAB-I': 6,
-            'BODY-B': 7,
-            'BODY-I': 8,
-            'DRUGS-B': 9,
-            'DRUGS-I': 10,
-            'TREATMENT-B': 11,
-            'TREATMENT-I': 12,
+            "O": 0,
+            "B-DISEASE": 1,
+            "I-DISEASE": 2,
+            "B-SIGN": 3,
+            "I-SIGN": 4,
+            "B-MARGIN": 5,
+            "I-MARGIN": 6,
+            "B-DIAMETER": 7,
+            "I-DIAMETER": 8,
+            "B-TESTPROC": 9,
+            "I-TESTPROC": 10,
+            "B-TREATMENT": 11,
+            "I-TREATMENT": 12,
+            "B-ANATOMY": 13,
+            "I-ANATOMY": 14,
+            "B-NATURE": 15,
+            "I-NATURE": 16,
+            "B-SHAPE": 17,
+            "I-SHAPE": 18,
+            "B-DENSITY": 19,
+            "I-DENSITY": 20,
+            "B-BOUNDARY": 21,
+            "I-BOUNDARY": 22,
+            "B-LUNGFIELD": 23,
+            "I-LUNGFIELD": 24,
+            "B-TEXTURE": 25,
+            "I-TEXTURE": 26,
+            "B-TRANSPARENCY": 27,
+            "I-TRANSPARENCY": 28
         }
         self.label_dict = {j: i for i, j in self.class_dict.items()}
         self.EMBEDDING_DIM = 300
@@ -48,7 +66,6 @@ class LSTMNER:
         self.VOCAB_SIZE = len(self.word_dict)
         self.TIME_STAMPS = 1000  # 预测的时候为输入段落的最长长度
         self.model = self.tokenvec_bilstm2_crf_model()
-        self.model.load_weights(self.model_path)
         self.datas = self.build_data()
 
     def load_worddict(self):
@@ -82,12 +99,12 @@ class LSTMNER:
     '''将数据转换成keras所需的格式'''
 
     def modify_data(self):
-        x_test=[]
-        txt=""
+        x_test = []
+        txt = ""
         for data in self.datas:
-            txt=txt.join(str(i) for i in data[0])
+            txt = txt.join(str(i) for i in data[0])
             x_test.append(txt)
-            txt=""
+            txt = ""
         return x_test
 
     def build_input(self, text):
@@ -154,60 +171,78 @@ class LSTMNER:
         model.summary()
         return model
 
-    def recall_score(self,y_pre):
-        sample_y=[]
-        y_true=[]
-        for data in self.datas:
-            for tag in data[1]:
-                sample_y.append(tag)
-            y_true.append(sample_y)
-            sample_y=[]
-        T=0
-        Total=0
-        for i,tags in enumerate(y_true):
-            for j,tag in enumerate(tags):
-                if tag=='O':
-                    continue
-                Total=Total+1
-                if y_pre[i][j].split("_")[0]==tag.split("_")[0]:
-                    T=T+1
-        return T/Total
-
-    def precision_score(self,y_pre):
-        sample_y=[]
-        y_true=[]
-        for data in self.datas:
-            for tag in data[1]:
-                sample_y.append(tag)
-            y_true.append(sample_y)
-            sample_y=[]
-        T=0
-        Total=0
-        for i,tags in enumerate(y_pre):
-            for j,tag in enumerate(tags):
-                if tag=='O':
-                    continue
-                Total=Total+1
-                if y_true[i][j].split("_")[0]==tag.split("_")[0]:
-                    T=T+1
-        return T/Total
+    def output(self, cnt):
+        output = []
+        flag = 0
+        start = []
+        end = []
+        tags = []
+        for i, tag in enumerate(cnt):
+            if tag == 'O':
+                if flag == 1:
+                    end = i-1
+                    output.append([tags, start, end])
+                flag = 0
+                continue
+            if tag.split("-")[0] == 'B':
+                if flag == 1:
+                    end = i-1
+                flag = 1
+                start = i
+                tags = tag.split("-")[1]
+                continue
+        return output
 
     def test_model(self):
-        x_test= self.modify_data()
-        predictions=[]
-        for text in x_test:
-            str = self.build_input(text)
-            raw = self.model.predict(str)[0][-self.TIME_STAMPS:]
-            result = [np.argmax(row) for row in raw]
-            tags = [self.label_dict[i] for i in result][len(result)-len(text):]
-            predictions.append(tags)
-        # f1_cnt=f1_score(self.datas[1],predictions)
-        precision_cnt=self.precision_score(predictions)
-        recall_cnt=self.recall_score(predictions)
-        # print(f1_cnt)
-        print(precision_cnt)
-        print(recall_cnt)
-        print((2 * precision_cnt * recall_cnt)/(precision_cnt + recall_cnt))
+        f = open("score.txt", 'a+', encoding='utf-8')
+        for root, dirs, files in os.walk("model/model/"):
+            x_test = self.modify_data()
+            epoch = 0
+            for file in files:
+                epoch = epoch+1
+                self.model.load_weights(root+file)
+                y_pre = []
+                filename = open(self.test_path.replace(".txt","")+"_Result.txt", 'w+',encoding='utf-8')  
+                for text in x_test:
+                    string = self.build_input(text)
+                    raw = self.model.predict(string)[0][-self.TIME_STAMPS:]
+                    result = [np.argmax(row) for row in raw]
+                    tags = [self.label_dict[i]
+                            for i in result][len(result)-len(text):]
+                    for i,tag in enumerate(tags):
+                        y_pre.append(tag)
+                        filename.write(text[i]+'\t'+str(tag)+'\n') 
+                filename.close()
+                y_true = []
+                for data in self.datas:
+                    for tag in data[1]:
+                        y_true.append(tag)
+                print("第"+str(epoch)+"轮模型结果:")
+                y_pre = self.output(y_pre)
+                y_true = self.output(y_true)
+                filename = open(self.test_path.replace(".txt","")+"_P.txt", 'w+',encoding='utf-8')  
+                for value in y_pre:  
+                     filename.write(str(value)+'\n') 
+                filename.close() 
+                filename = open(self.test_path.replace(".txt","")+"_T.txt", 'w+',encoding='utf-8')  
+                for value in y_true:  
+                     filename.write(str(value)+'\n') 
+                filename.close()  
+                c = [x for x in y_pre if x not in y_true]
+                d = [y for y in y_true if y not in y_pre]
+                TP = len(y_pre)-len(c)
+                FP = len(c)
+                FN = len(d)
+                precision_score = TP/(TP+FP)
+                print("precision_score=TP/(TP+FP):"+str(precision_score))
+                recall_score = TP/(TP+FN)
+                print("recall_score=TP/(TP+FN):"+str(recall_score))
+                f1 = precision_score*recall_score * \
+                    2/(precision_score+recall_score)
+                print(
+                    "F1=precision_score*recall_score*2/(precision_score+recall_score):"+str(f1))
+                f.write(str(TP)+'\t'+str(FP)+'\t'+str(FN)+'\t'+str(precision_score) + '\t' +str(recall_score) + '\t' + str(f1) + '\n')
+        f.close()
 
 
 if __name__ == '__main__':
